@@ -103,12 +103,15 @@
           firebase.firestore().collection('users').doc(userCredential.user.uid).set({
             email: email,
             country: country
+          }).then(() => {
+            // Redirect the user to the main page
+            alert('Account creation successful.');
+            location.replace('home.html');
           }).catch((error) => {
             alert(error);
+            button.disabled = false;
+            return;
           });
-          // Redirect the user to the main page
-          alert('Account creation successful.');
-          location.replace('home.html');
         })
         .catch((error) => {
           alert(error.message);
